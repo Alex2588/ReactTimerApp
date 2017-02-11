@@ -25030,6 +25030,10 @@
 	            }
 	        }
 	    },
+	    componentWillUnmount: function componentWillUnmount() {
+	        clearInterval(this.timer);
+	        this.timer = null;
+	    },
 	    startTimer: function startTimer() {
 	        var _this = this;
 
@@ -25038,6 +25042,10 @@
 	            _this.setState({
 	                count: newCount >= 0 ? newCount : 0
 	            });
+
+	            if (newCount === 0) {
+	                _this.setState({ countdownStatus: 'stopped' });
+	            }
 	        }, 1000);
 	    },
 	    handleStatusChange: function handleStatusChange(newStatus) {
